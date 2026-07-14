@@ -6,11 +6,11 @@
 
 ## Windows command line
 
-| Status | Syntax | Effect |
-|---|---|---|
-| I | `SilentHillPC.exe -data <directory>` | Change only the directory searched for disc images. A direct image path does not work; config, mods, logs, and saves remain relative to the working directory. |
-| I | `SilentHillPC.exe -h` / `--help` | Print usage and exit. |
-| D | Other arguments | Unknown options and a trailing `-data` are ignored. |
+| Syntax | Effect | Status |
+| --- | --- | --- |
+| `SilentHillPC.exe -data <directory>` | Change only the directory searched for disc images. A direct image path does not work; config, mods, logs, and saves remain relative to the working directory. | I |
+| `SilentHillPC.exe -h` / `--help` | Print usage and exit. | I |
+| Other arguments | Unknown options and a trailing `-data` are ignored. | D |
 
 ## Normal controls
 
@@ -35,28 +35,28 @@ Classic is the default fixed-camera/tank style. TPS, OTS, and FPS are experiment
 
 ### Global controls
 
-| Status | Default | Gate/state | Behavior |
-|---|---|---|---|
-| I | Escape | Always; rebindable as `key_exit_game` | Quit at the title; otherwise warm-reset to it. Suppressed during console input. |
-| I | F6 / F8 | Settled gameplay; rebindable | Open the original save/load screens through their normal flows. These are not snapshot saves. |
-| I | F9 / right-stick click | Settled gameplay; rebindable | Cycle and save Classic → TPS → OTS → FPS. No debug gate. |
-| I | Mouse3 | OTS gameplay; rebindable | Swap shoulder side for the session. |
-| I | Backspace | Settled gameplay; fixed | Toggle the alternate-style crosshair setting for the session. |
-| I | Console key (`` ` ``) | `allow_debug_controls = 1`; rebindable | One press opens overlay and input; the next closes both. |
-| I | Return, Escape, Space, or pad skip | FMV; fixed | Skip after all skip inputs have first been released. |
+| Default | Gate/state | Behavior | Status |
+| --- | --- | --- | --- |
+| Escape | Always; rebindable as `key_exit_game` | Quit at the title; otherwise warm-reset to it. Suppressed during console input. | I |
+| F6 / F8 | Settled gameplay; rebindable | Open the original save/load screens through their normal flows. These are not snapshot saves. | I |
+| F9 / right-stick click | Settled gameplay; rebindable | Cycle and save Classic → TPS → OTS → FPS. No debug gate. | I |
+| Mouse3 | OTS gameplay; rebindable | Swap shoulder side for the session. | I |
+| Backspace | Settled gameplay; fixed | Toggle the alternate-style crosshair setting for the session. | I |
+| Console key (`` ` ``) | `allow_debug_controls = 1`; rebindable | One press opens overlay and input; the next closes both. | I |
+| Return, Escape, Space, or pad skip | FMV; fixed | Skip after all skip inputs have first been released. | I |
 
 ### Graphics controls
 
 These are user controls and do not require the debug gate.
 
-| Status | Default | Behavior |
-|---|---|---|
-| E | F1 | Toggle/save runtime PGXP; default off. |
-| I | F2 | Cycle/save Off, CRT, Scanlines, Vignette, Color Grade, Film Grain, Sharpen, PSX Retro, Cinematic. |
-| I | F3 | Cycle/save Off, Reinhard, ACES, Filmic tone mapping. |
-| I | F4 | Cycle/save Classic, Classic+Shadows, Modern, Modern+Shadows flashlight modes. |
-| I | `\` | Rebindable: select the next enabled flashlight intensity, post mix, tone mix, or flashlight size. FPS uses separate beam values. |
-| I | `[` / `]` | Rebindable: lower/raise the selected value by `0.05`; hold to repeat, save on release. |
+| Default | Behavior | Status |
+| --- | --- | --- |
+| F1 | Toggle/save runtime PGXP; default off. | E |
+| F2 | Cycle/save Off, CRT, Scanlines, Vignette, Color Grade, Film Grain, Sharpen, PSX Retro, Cinematic. | I |
+| F3 | Cycle/save Off, Reinhard, ACES, Filmic tone mapping. | I |
+| F4 | Cycle/save Classic, Classic+Shadows, Modern, Modern+Shadows flashlight modes. | I |
+| `\` | Rebindable: select the next enabled flashlight intensity, post mix, tone mix, or flashlight size. FPS uses separate beam values. | I |
+| `[` / `]` | Rebindable: lower/raise the selected value by `0.05`; hold to repeat, save on release. | I |
 
 ## Console operation
 
@@ -78,23 +78,23 @@ The dispatcher accepts exactly **55 canonical commands plus 7 aliases: 62 unique
 
 ### Session, maps, flags, player, and NPCs
 
-| Status | Canonical command | Alias | Syntax and behavior | Persistence |
-|---|---|---|---|---|
-| I | `quit` | — | Exit immediately. | — |
-| I | `help` | — | `help` or `help give [2]`: show the abbreviated command list or two item pages. | Session |
-| I | `getflags` | — | Report ending flags, including Cybil `449` and Good path `391`. | Session |
-| I | `setflag` | — | `setflag <0..1663> <0\|1>`: change a live event flag and remember up to 24 entries for reapplication after a New Game reset. | Live save/session |
-| I | `setending` | — | `setending <bad\|bad+\|badplus\|good\|good+\|goodplus>`: set flags `449` and `391`; use before the ending trigger. | Live save/session |
-| I | `clearflags` | — | Forget only pending console-set flags. Live flags remain; load a save to reset them. | Session |
-| I | `debug` | — | `debug [2]`: show the stale built-in key pages; use this guide for current bindings. | Session |
-| I | `map` | — | `map`: list 43 registry names. `map <name>` selects the next-New-Game start map for this run; it never warps the active game. Missing modules load metadata-only stubs. | Session |
-| I | `give` | — | `give <item>`: add an item; stack ammo/recovery, avoid duplicate unique items, and include ammunition with guns. `health`, `ammo`, and `allweapons` are bundles. | Live save |
-| I | `kill` | — | Kill Harry through the death path. | Session |
-| I | `killall` | — | Apply lethal damage to living non-Harry NPCs within ±50 world units on X/Z. | Session |
-| E | `spawn` | — | `spawn list` reports ready resident/pool models and missing animation/AI. `spawn <name> [state]` uses a free slot four units ahead; map-bound types can be `[no-ai]` statues and foreign SFX are limited. | Session |
-| E | `unlimited` | — | `unlimited [0\|1]`: toggle/set the raised natural-spawn cap of 32; default off. | Session |
-| I | `noclip` | — | Toggle wall collision; floor collision remains active. | Session |
-| I | `god` | — | `god [0\|1]`: toggle/set damage immunity and hold Harry at full health. | Session |
+| Canonical command | Alias | Syntax and behavior | Persistence | Status |
+| --- | --- | --- | --- | --- |
+| `quit` | — | Exit immediately. | — | I |
+| `help` | — | `help` or `help give [2]`: show the abbreviated command list or two item pages. | Session | I |
+| `getflags` | — | Report ending flags, including Cybil `449` and Good path `391`. | Session | I |
+| `setflag` | — | `setflag <0..1663> <0\|1>`: change a live event flag and remember up to 24 entries for reapplication after a New Game reset. | Live save/session | I |
+| `setending` | — | `setending <bad\|bad+\|badplus\|good\|good+\|goodplus>`: set flags `449` and `391`; use before the ending trigger. | Live save/session | I |
+| `clearflags` | — | Forget only pending console-set flags. Live flags remain; load a save to reset them. | Session | I |
+| `debug` | — | `debug [2]`: show the stale built-in key pages; use this guide for current bindings. | Session | I |
+| `map` | — | `map`: list 43 registry names. `map <name>` selects the next-New-Game start map for this run; it never warps the active game. Missing modules load metadata-only stubs. | Session | I |
+| `give` | — | `give <item>`: add an item; stack ammo/recovery, avoid duplicate unique items, and include ammunition with guns. `health`, `ammo`, and `allweapons` are bundles. | Live save | I |
+| `kill` | — | Kill Harry through the death path. | Session | I |
+| `killall` | — | Apply lethal damage to living non-Harry NPCs within ±50 world units on X/Z. | Session | I |
+| `spawn` | — | `spawn list` reports ready resident/pool models and missing animation/AI. `spawn <name> [state]` uses a free slot four units ahead; map-bound types can be `[no-ai]` statues and foreign SFX are limited. | Session | E |
+| `unlimited` | — | `unlimited [0\|1]`: toggle/set the raised natural-spawn cap of 32; default off. | Session | E |
+| `noclip` | — | Toggle wall collision; floor collision remains active. | Session | I |
+| `god` | — | `god [0\|1]`: toggle/set damage immunity and hold Harry at full health. | Session | I |
 
 `give` item names: `knife`, `pipe`, `rockdrill`, `hammer`, `chainsaw`, `katana`, `axe`, `handgun`, `rifle`, `shotgun`, `hyperblaster`, `handgunammo`, `rifleammo`, `shotgunammo`, `gasoline`/`gas`, `healthdrink`, `firstaid`, `ampoule`, `flauros`, `channelingstone`, `plasticbottle`, `aglaophotis`, `kaufmannkey`, `ringofcontract`, `stoneoftime`, `amulet`, `crestofmercury`, `ankh`, `dagger`, `disk`, `goldmedallion`, `silvermedallion`, `lighter`, `videotape`, `camera`, `chemical`, and `bloodpack`.
 
@@ -102,60 +102,60 @@ The dispatcher accepts exactly **55 canonical commands plus 7 aliases: 62 unique
 
 ### Inventory and collision tuning
 
-| Status | Canonical command | Alias | Syntax and behavior | Persistence |
-|---|---|---|---|---|
-| I | `invaspect` | — | `invaspect [0\|1]`: toggle/set PSX-faithful (`0`) or square/true (`1`) item proportions. | Session |
-| I | `invscale` | — | `invscale <50..200>`: set item vertical scale percent; default `125`. | Session |
-| I | `invcary` | — | `invcary [int]`: show/set carousel Y offset; positive is down. | Session |
-| I | `inveqy` | — | `inveqy [int]`: show/set equipped-item Y offset; positive is down. | Session |
-| I | `invdim` | — | `invdim <0..100>`: set off-center carousel dim percent. | Session |
-| E | `obst` | — | `obst [0\|1]`: show/set round-obstacle (`ptr_18`) collision. | Session |
-| E | `collscope` | — | `collscope [0\|1]`: show/set preload collision scope: vanilla local cell (`1`) or all chunks (`0`). | Session |
-| E | `alpha` | — | `alpha [0\|1]`: show/set the capped slope-alpha invisible-wall fix. | Session |
+| Canonical command | Alias | Syntax and behavior | Persistence | Status |
+| --- | --- | --- | --- | --- |
+| `invaspect` | — | `invaspect [0\|1]`: toggle/set PSX-faithful (`0`) or square/true (`1`) item proportions. | Session | I |
+| `invscale` | — | `invscale <50..200>`: set item vertical scale percent; default `125`. | Session | I |
+| `invcary` | — | `invcary [int]`: show/set carousel Y offset; positive is down. | Session | I |
+| `inveqy` | — | `inveqy [int]`: show/set equipped-item Y offset; positive is down. | Session | I |
+| `invdim` | — | `invdim <0..100>`: set off-center carousel dim percent. | Session | I |
+| `obst` | — | `obst [0\|1]`: show/set round-obstacle (`ptr_18`) collision. | Session | E |
+| `collscope` | — | `collscope [0\|1]`: show/set preload collision scope: vanilla local cell (`1`) or all chunks (`0`). | Session | E |
+| `alpha` | — | `alpha [0\|1]`: show/set the capped slope-alpha invisible-wall fix. | Session | E |
 
 ### Rendering and camera tuning
 
-| Status | Canonical command | Alias | Syntax and behavior | Persistence |
-|---|---|---|---|---|
-| E | `vfov` | — | `vfov [float]`: world vertical-FOV scale; `1` is neutral. | Session |
-| E | `hfov` | — | `hfov [float]`: Hor+ horizontal scale; `1` is neutral, larger widens models. | Session |
-| E | `vshift` | — | `vshift [float]`: world vertical shift in PSX units; positive moves the view up. | Session |
-| E | `msgshift` | — | `msgshift [int]`: message-box upward shift in PSX units; default `0`. | Session |
-| E | `bary` | — | `bary [int]`: letterbox outer Y; inner Y becomes outer minus 16. | Session |
-| E | `fogstr` | — | `fogstr [float]`: fog-density multiplier; `1` is native PC fog. | Session |
-| E | `weld` | — | `weld [float]`: PGXP seam-weld radius in pixels; `0` disables it. | Session |
-| E | `weldw` | — | `weldw [float]`: PGXP weld-depth ratio. | Session |
-| E | `pgxpedge` | — | `pgxpedge [float]`: precise-position off-screen clamp; default `8192` PSX units. | Session |
-| E | `pgxpdepth` | — | `pgxpdepth [0\|1]`: toggle/set unquantized per-vertex W; default on within PGXP. | Session |
-| E | `pgxpnearclip` | — | `pgxpnearclip [0\|1]`: toggle/set near-plane clipping; default on within PGXP. | Session |
-| E | `pgxpnearz` | — | `pgxpnearz [float]`: show/set near-clip depth, clamped to at least `1`; default `16`. | Session |
-| E | `add` | — | `add [int]`: additive-layer diagnostic; intended modes are `0` skip, `1` normal, `2` depth-tested. | Session |
-| E | `pgxp` | — | `pgxp [0\|1]`: toggle/set runtime PGXP; effective, experimental, default off. | Config |
-| I | `fov` | — | `fov [55..110\|default]`: show/set FPS FOV; `default` restores `67.4°`. | Config |
+| Canonical command | Alias | Syntax and behavior | Persistence | Status |
+| --- | --- | --- | --- | --- |
+| `vfov` | — | `vfov [float]`: world vertical-FOV scale; `1` is neutral. | Session | E |
+| `hfov` | — | `hfov [float]`: Hor+ horizontal scale; `1` is neutral, larger widens models. | Session | E |
+| `vshift` | — | `vshift [float]`: world vertical shift in PSX units; positive moves the view up. | Session | E |
+| `msgshift` | — | `msgshift [int]`: message-box upward shift in PSX units; default `0`. | Session | E |
+| `bary` | — | `bary [int]`: letterbox outer Y; inner Y becomes outer minus 16. | Session | E |
+| `fogstr` | — | `fogstr [float]`: fog-density multiplier; `1` is native PC fog. | Session | E |
+| `weld` | — | `weld [float]`: PGXP seam-weld radius in pixels; `0` disables it. | Session | E |
+| `weldw` | — | `weldw [float]`: PGXP weld-depth ratio. | Session | E |
+| `pgxpedge` | — | `pgxpedge [float]`: precise-position off-screen clamp; default `8192` PSX units. | Session | E |
+| `pgxpdepth` | — | `pgxpdepth [0\|1]`: toggle/set unquantized per-vertex W; default on within PGXP. | Session | E |
+| `pgxpnearclip` | — | `pgxpnearclip [0\|1]`: toggle/set near-plane clipping; default on within PGXP. | Session | E |
+| `pgxpnearz` | — | `pgxpnearz [float]`: show/set near-clip depth, clamped to at least `1`; default `16`. | Session | E |
+| `add` | — | `add [int]`: additive-layer diagnostic; intended modes are `0` skip, `1` normal, `2` depth-tested. | Session | E |
+| `pgxp` | — | `pgxp [0\|1]`: toggle/set runtime PGXP; effective, experimental, default off. | Config | E |
+| `fov` | — | `fov [55..110\|default]`: show/set FPS FOV; `default` restores `67.4°`. | Config | I |
 
 `USE_PGXP=0` is vestigial: current GTE, GPU, and shader paths are built unconditionally and controlled at runtime.
 
 ### Lighting, effects, audio, media, and animation
 
-| Status | Canonical command | Alias | Syntax and behavior | Persistence |
-|---|---|---|---|---|
-| I | `fmv` | — | `fmv`: list 21 video streams. `fmv <1-based #\|filename\|intro1..2\|end1..5>` fades out, plays the movie, then fades back. | Session |
-| I | `flmode` | — | `flmode <0..3\|classic\|classicshadows\|modern\|modernshadows>`: select the flashlight mode; default Classic. | Config |
-| I | `shadows` | — | `shadows [0\|1]`: toggle/set shadows within the active classic/modern family. | Config |
-| E | `shadowbias` | — | `shadowbias [float]`: show/set shadow depth bias. | Session |
-| E | `shadowstrength` | — | `shadowstrength [float]`: show/set shadow opacity; `1` is full/default. | Session |
-| E | `shadowfade` | — | `shadowfade [float]`: show/set contact-fade distance; `0` is off. | Session |
-| E | `shadownormal` | — | `shadownormal [float]`: show/set shadow receiver offset; `0` is off. | Session |
-| E | `shadowfpsdrop` | — | `shadowfpsdrop [float]`: show/set FPS shadow-light drop. | Session |
-| E | `flashlight` | `fl` | `flashlight [color]`: override flashlight color; no argument, `default`, or `off` clears it. | Session |
-| E | `worldlight` | `wl` | `worldlight [color]`: override world-light color; no argument, `default`, or `off` clears it. | Session |
-| I | `adsr` | — | `adsr [0\|1]`: toggle/set sequenced-BGM instrument envelopes; default on. | Session |
-| I | `revscale` | — | `revscale [0..8]`: show/set reverb depth-to-wet scaling; `0` uses engine mapping. Edit `reverb_scale` to persist it. | Session |
-| I | `kf` | `keyframe` | `kf [nonnegative frame]`: report inspector state or select an absolute frame and enable it. | Session |
-| I | `flintensity` | `flint` | `flintensity [0..3]`: show/set active-camera beam intensity; FPS has a separate value. | Config |
-| I | `postintensity` | `postint` | `postintensity [0..1]`: show/set post-process mix. | Config |
-| I | `tmintensity` | `tmint` | `tmintensity [0..1]`: show/set tone-map mix. | Config |
-| I | `xavolume` | `xavol` | `xavolume [0..100]`: show/set XA voice volume. FMV movie volume is separate. | Config |
+| Canonical command | Alias | Syntax and behavior | Persistence | Status |
+| --- | --- | --- | --- | --- |
+| `fmv` | — | `fmv`: list 21 video streams. `fmv <1-based #\|filename\|intro1..2\|end1..5>` fades out, plays the movie, then fades back. | Session | I |
+| `flmode` | — | `flmode <0..3\|classic\|classicshadows\|modern\|modernshadows>`: select the flashlight mode; default Classic. | Config | I |
+| `shadows` | — | `shadows [0\|1]`: toggle/set shadows within the active classic/modern family. | Config | I |
+| `shadowbias` | — | `shadowbias [float]`: show/set shadow depth bias. | Session | E |
+| `shadowstrength` | — | `shadowstrength [float]`: show/set shadow opacity; `1` is full/default. | Session | E |
+| `shadowfade` | — | `shadowfade [float]`: show/set contact-fade distance; `0` is off. | Session | E |
+| `shadownormal` | — | `shadownormal [float]`: show/set shadow receiver offset; `0` is off. | Session | E |
+| `shadowfpsdrop` | — | `shadowfpsdrop [float]`: show/set FPS shadow-light drop. | Session | E |
+| `flashlight` | `fl` | `flashlight [color]`: override flashlight color; no argument, `default`, or `off` clears it. | Session | E |
+| `worldlight` | `wl` | `worldlight [color]`: override world-light color; no argument, `default`, or `off` clears it. | Session | E |
+| `adsr` | — | `adsr [0\|1]`: toggle/set sequenced-BGM instrument envelopes; default on. | Session | I |
+| `revscale` | — | `revscale [0..8]`: show/set reverb depth-to-wet scaling; `0` uses engine mapping. Edit `reverb_scale` to persist it. | Session | I |
+| `kf` | `keyframe` | `kf [nonnegative frame]`: report inspector state or select an absolute frame and enable it. | Session | I |
+| `flintensity` | `flint` | `flintensity [0..3]`: show/set active-camera beam intensity; FPS has a separate value. | Config | I |
+| `postintensity` | `postint` | `postintensity [0..1]`: show/set post-process mix. | Config | I |
+| `tmintensity` | `tmint` | `tmintensity [0..1]`: show/set tone-map mix. | Config | I |
+| `xavolume` | `xavol` | `xavolume [0..100]`: show/set XA voice volume. FMV movie volume is separate. | Config | I |
 
 Color values are `red`, `green`, `blue`, `yellow`, `cyan`, `purple`/`magenta`, `orange`, `pink`, and `white`. AVI/BIN behavior and the 30-stream table are in [fmv_files.md](fmv_files.md).
 

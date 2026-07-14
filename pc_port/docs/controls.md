@@ -8,12 +8,12 @@ Gameplay actions still enter the original PSX button path. PC code adds camera l
 
 Two configurable schemes serve four styles:
 
-| Style | Scheme | Status | Behavior |
-|---|---|---|---|
-| Classic | Classic | I; default | Fixed-camera tank movement and original scene cameras. |
-| TPS | Alternate | E | Third-person orbit camera and shooter-style movement. |
-| OTS | Alternate | E | TPS behavior with shoulder offset and a shoulder-swap action. |
-| FPS | Alternate | E | First-person view, separate FOV/beam values, and optional head tracking. |
+| Style | Scheme | Behavior | Status |
+| --- | --- | --- | --- |
+| Classic | Classic | Fixed-camera tank movement and original scene cameras. | I; default |
+| TPS | Alternate | Third-person orbit camera and shooter-style movement. | E |
+| OTS | Alternate | TPS behavior with shoulder offset and a shoulder-swap action. | E |
+| FPS | Alternate | First-person view, separate FOV/beam values, and optional head tracking. | E |
 
 F9 or the configured pad button cycles Classic → TPS → OTS → FPS during settled gameplay and saves `control_style`. This is not debug-gated. Menus temporarily use Classic bindings; returning to gameplay restores the selected scheme. `control_2d = 1` adds experimental screen-relative movement to Classic/TPS/OTS, not FPS.
 
